@@ -17,10 +17,40 @@ class PhotosController < ApplicationController
     redirect_to("/photos/#{post.id}")
   end
 
+  def update
+    post_id = params.fetch("post_id")
+    post = Photo.where({ :id => post_id }).first
+    post.image = params.fetch("new_img")
+    post.caption = params.fetch("new_caption")
+    post.save
+
+    redirect_to("/photos/#{post.id}")
+  end
+
+  def delete
+    post_id = params.fetch("post_id")
+    post = Photo.where({ :id => post_id }).first
+    post.destroy
+
+    redirect_to("/photos")
+  end
+
   def detail
     post_id = params.fetch("post_id")
     @post = Photo.where({ :id => post_id }).first
+    @comments = @post.comments
 
     render template: "photo_templates/detail"
   end
+
+  def comment
+    comment = Comment.new
+    comment.photo_id = params.fetch("post_id")
+    comment.body = params.fetch("new_comment")
+    comment.author_id = params.fetch("author_id")
+    comment.save
+
+    redirect_to("/photos/#{comment.photo_id}")
+  end
+
 end
