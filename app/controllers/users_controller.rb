@@ -27,4 +27,16 @@ class UsersController < ApplicationController
 
     render template: "user_templates/detail"
   end
+    
+  def update
+    handle = params.fetch("username")
+    new_handle = params.fetch("new_username")
+    user = User.where({ :username => handle }).first
+    user.username = new_handle
+    user.save
+
+    @all_users = User.all
+
+    redirect_to("/users/#{user.username}")
+  end
 end
