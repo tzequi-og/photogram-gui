@@ -1,0 +1,24 @@
+<h1>Photo Details</h1>
+
+<dl>
+  <dt>Image</dt>
+  <dd><img src="<%= @post.image %>" height="300px"></dd>
+  <dt>Caption</dt>
+  <dd><%= @post.caption %></dd>
+  <dt>Owner</dt>
+  <dd><%= @post.poster.username %></dd>
+  <dt>Posted</dt>
+  <dd><%= @post.created_at %></dd>
+  <dt>Edit photo</dt>
+  <dd>
+    <form action="/update_photo/<%= @post.id %>" method="post">
+      <label for="image_update">Username</label>
+      <input type="text" id="image_update" name="new_img" value="<%= @post.image %>">
+      <label for="caption_update">Caption</label>
+      <textarea id="caption_update" name="new_caption"><%= @post.caption %></textarea>
+      <button type="submit">Update photo</button>
+    </form>
+  </dd>
+  <dt>Delete photo</dt>
+  <dd><a href="/delete_photo/<%= @post.id %>">Delete this photo</a></dd>
+</dl>

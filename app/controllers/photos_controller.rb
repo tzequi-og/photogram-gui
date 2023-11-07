@@ -16,4 +16,11 @@ class PhotosController < ApplicationController
 
     redirect_to("/photos/#{post.id}")
   end
+
+  def detail
+    post_id = params.fetch("post_id")
+    @post = Photo.where({ :id => post_id }).first
+
+    render template: "photo_templates/detail"
+  end
 end

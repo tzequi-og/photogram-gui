@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   post "/update_user/:username", controller: "users", action: "update"
 
   get "/photos", controller: "photos", action: "photos_list"
+  get "/photos/:post_id", controller: "photos", action: "detail"
   post "/add_photo", controller: "photos", action: "create"
+  post "delete_photo/:post_id", controller: "photos", action: "delete"
+  post "update_photo/:post_id", controller: "photos", action: "update"
 end
