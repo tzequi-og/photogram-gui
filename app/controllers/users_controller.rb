@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     @all_users = User.all
 
-    render template: "user_templates/list"
+    redirect_to("/users/#{user.username}")
   end
 
   def detail
